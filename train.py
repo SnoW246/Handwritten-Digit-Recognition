@@ -21,3 +21,11 @@ print("Loading MNIST Dataset...")
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
 # Display message to inform user that loading is done
 print("Loading Complete.")
+
+# Displaying total number of shapes before reshaping and normalizing
+print("\nDisplaying total # of shapes in each category:")
+print("Total # for X-Train Shapes", X_train.shape)
+print("Total # for Y-Train Shapes", Y_train.shape)
+print("Total # for X-Test Shapes", X_test.shape)
+print("Total # for Y-Test Shapes", Y_test.shape)
+
