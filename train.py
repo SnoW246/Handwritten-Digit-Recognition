@@ -29,9 +29,20 @@ print("Total # for Y-Train Shapes", Y_train.shape)
 print("Total # for X-Test Shapes", X_test.shape)
 print("Total # for Y-Test Shapes", Y_test.shape)
 
-# Reshaping the 28x28 pixel inputs into a single vector before normalizing it
+# Reshaping the 28x28 pixel inputs into a single vector before normalization
 print("\nReshaping inputs...")
 X_train = X_train.reshape(60000, 784)
 X_test = X_test.reshape(10000, 784)
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
+
+# Normalization of pixel values to lie between 0 & 1. Normalization of  
+# data helps to speed up the training & reduces the chance of getting stuck
+print("Normalizing Data...")
+X_train /= 255
+X_test /= 255
+
+# Displaying final shapes ready for training
+print("\nDisplaying final shapes ready for training:")
+print("Train matrix shape", X_train.shape)
+print("Test matrix shape", X_test.shape)
