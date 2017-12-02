@@ -29,3 +29,9 @@ print("Total # for Y-Train Shapes", Y_train.shape)
 print("Total # for X-Test Shapes", X_test.shape)
 print("Total # for Y-Test Shapes", Y_test.shape)
 
+# Reshaping the 28x28 pixel inputs into a single vector before normalizing it
+print("\nReshaping inputs...")
+X_train = X_train.reshape(60000, 784)
+X_test = X_test.reshape(10000, 784)
+X_train = X_train.astype('float32')
+X_test = X_test.astype('float32')
