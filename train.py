@@ -18,16 +18,16 @@ from keras.utils import np_utils
 print("Loading MNIST Dataset...")
 # Loading MNIST dataset onto the system, which will automatically download the dataset from
 # the following location: https://s3.amazonaws.com/img-datasets/mnist.npz if not already downloaded
-(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
 # Display message to inform user that loading is done
 print("Loading Complete.")
 
 # Displaying total number of shapes before reshaping and normalizing
 print("\nDisplaying total # of shapes in each category:")
 print("Total # for X-Train Shapes", X_train.shape)
-print("Total # for Y-Train Shapes", Y_train.shape)
+print("Total # for Y-Train Shapes", y_train.shape)
 print("Total # for X-Test Shapes", X_test.shape)
-print("Total # for Y-Test Shapes", Y_test.shape)
+print("Total # for Y-Test Shapes", y_test.shape)
 
 # Reshaping the 28x28 pixel inputs into a single vector before normalization
 print("\nReshaping inputs...")
@@ -46,3 +46,18 @@ X_test /= 255
 print("\nDisplaying final shapes ready for training:")
 print("Train matrix shape", X_train.shape)
 print("Test matrix shape", X_test.shape)
+
+# Checking if Y for machine learning still holds integer values from 0 to 9
+print("\nChecking integers values & it's amount...")
+print(np.unique(y_train, return_counts=True))
+
+# Defining amount of classes
+n_classes = 10
+# One-Hot encoding using keras' numpy-related utilities, which converts 
+# variables into a form which can be provided to Machine Learning algorithms
+# to make more accurate predictions. Adapted from: 
+# https://hackernoon.com/what-is-one-hot-encoding-why-and-when-do-you-have-to-use-it-e3c6186d008f
+print("\n# of shapes before one-hot encoding: ", y_train.shape)
+Y_train = np_utils.to_categorical(y_train, n_classes)
+Y_test = np_utils.to_categorical(y_test, n_classes)
+print("# of shapes after one-hot encoding: ", Y_train.shape)
