@@ -61,3 +61,19 @@ print("\n# of shapes before one-hot encoding: ", y_train.shape)
 Y_train = np_utils.to_categorical(y_train, n_classes)
 Y_test = np_utils.to_categorical(y_test, n_classes)
 print("# of shapes after one-hot encoding: ", Y_train.shape)
+
+# Creating a linear stack of layers with sequential model package from keras,
+# which allows us to create a neural network
+# Adapted from: https://keras.io/getting-started/sequential-model-guide/
+print("\nCreating neural network...")
+model = Sequential()
+model.add(Dense(512, input_shape=(784,)))
+model.add(Activation('relu'))                            
+model.add(Dropout(0.2))
+
+model.add(Dense(512))
+model.add(Activation('relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(10))
+model.add(Activation('softmax'))
