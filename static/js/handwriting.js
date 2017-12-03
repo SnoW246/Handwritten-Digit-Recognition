@@ -51,12 +51,12 @@ function saveFile(){
 	var img = canvas.toDataURL("images/png");
 
     $.ajax({
-        url: '/upload',
+        url: "/upload",
         method: 'POST',
         data: img,
         success: function (res) {
             console.log(res);
-            $('#prediction').text( res);
+            $("#prediction").text( res);
 
         }, error: function (err) {
             console.log(err);
