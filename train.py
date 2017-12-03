@@ -4,9 +4,9 @@ import numpy as np
 # Setting up environment to keep using Keras TensorFlow backend
 import os
 # For CPU testing
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 # For GPU testing
-#os.environ['CUDA_VISIBLE_DEVICES'] = ''
+#os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 # Importing Keras datasets & essential libraries to build neural network
 from keras.datasets import mnist
@@ -33,8 +33,8 @@ print("Total # for Y-Test Shapes", y_test.shape)
 print("\nReshaping inputs...")
 X_train = X_train.reshape(60000, 784)
 X_test = X_test.reshape(10000, 784)
-X_train = X_train.astype('float32')
-X_test = X_test.astype('float32')
+X_train = X_train.astype("float32")
+X_test = X_test.astype("float32")
 
 # Normalization of pixel values to lie between 0 & 1. Normalization of  
 # data helps to speed up the training & reduces the chance of getting stuck
@@ -77,3 +77,29 @@ model.add(Dropout(0.2))
 
 model.add(Dense(10))
 model.add(Activation('softmax'))
+
+# Compiling keras sequential model with accuracy metrics and adam optimizer 
+# since values have been normalised to lie between 0 to 1
+# Optimizer adapted from: https://keras.io/optimizers/
+print("\nCompiling sequential model...")
+model.compile(loss="categorical_crossentropy", metrics=["accuracy"], optimizer="adam")
+
+# Training the model & saving metrics in history
+# https://keras.io/models/model/
+print("Initiating model training...")
+history = model.fit(X_train, Y_train,
+          batch_size=128, epochs=8,
+          verbose=2,
+          validation_data=(X_test, Y_test))
+print("Model training complete.")
+
+# Saving the model to custom directory
+# https://keras.io/getting-started/faq/
+print("Saving results...")
+# NOTE! -> save_dir should be changed acordingly to to match 
+# individuals OS system files
+save_dir = "c:/Users/Adrian/Documents/GitHub/Handwritten-Digit-Recognition/"
+model_name = "model.h5"
+model_path = os.path.join(save_dir, model_name)
+model.save(model_path)
+print("Trained model saved to %s " % model_path)
