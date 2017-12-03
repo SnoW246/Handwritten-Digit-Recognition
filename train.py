@@ -98,8 +98,6 @@ print("Model training complete.")
 print("Saving results...")
 # NOTE! -> save_dir should be changed acordingly to to match 
 # individuals OS system files
-save_dir = "c:/Users/Adrian/Documents/GitHub/Handwritten-Digit-Recognition/"
 model_name = "model.h5"
-model_path = os.path.join(save_dir, model_name)
-model.save(model_path)
+model.save(model_name)
 print("Trained model saved to %s " % model_path)

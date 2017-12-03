@@ -4,24 +4,24 @@ var lastX, lastY;
 var ctx;
 
 // Adapted from: https://stackoverflow.com/questions/2368784/draw-on-html5-canvas-using-a-mouse
-function InitCanvas() {
-    ctx = document.getElementById('myCanvas').getContext("2d");
+function InitThis() {
+    ctx = document.getElementById("myCanvas").getContext("2d");
 
-    $('#myCanvas').mousedown(function (e) {
+    $("#myCanvas").mousedown(function (e) {
         mousePressed = true;
         Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
     });
 
-    $('#myCanvas').mousemove(function (e) {
+    $("#myCanvas").mousemove(function (e) {
         if (mousePressed) {
             Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
         }
     });
 
-    $('#myCanvas').mouseup(function (e) {
+    $("#myCanvas").mouseup(function (e) {
         mousePressed = false;
     });
-	    $('#myCanvas').mouseleave(function (e) {
+	    $("#myCanvas").mouseleave(function (e) {
         mousePressed = false;
     });
 }
@@ -29,8 +29,8 @@ function InitCanvas() {
 function Draw(x, y, isDown) {
     if (isDown) {
         ctx.beginPath();
-        ctx.strokeStyle = $('black').val();
-        ctx.lineWidth = $('#selWidth').val();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = $("#selWidth").val();
         ctx.lineJoin = "round";
         ctx.moveTo(lastX, lastY);
         ctx.lineTo(x, y);
@@ -45,4 +45,21 @@ function clearArea() {
     // Use the identity matrix while clearing the canvas
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+function saveFile(){
+	var img = canvas.toDataURL("images/png");
+
+    $.ajax({
+        url: '/upload',
+        method: 'POST',
+        data: img,
+        success: function (res) {
+            console.log(res);
+            $('#prediction').text( res);
+
+        }, error: function (err) {
+            console.log(err);
+        }
+    });
 }
