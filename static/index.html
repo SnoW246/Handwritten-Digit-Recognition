@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- Author: Adrian Golias -->
+<html>
+	<head>
+		<meta charset="utf-8">
+        <title>Handwritten Digit Recognizer</title>
+	</head>
+	
+	<!-- Adapted from https://stackoverflow.com/questions/2368784/draw-on-html5-canvas-using-a-mouse -->
+	<body onload="InitCanvas()">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<h1>Draw a Number</h1>
+	<script type="text/javascript" src="/static/js/handwriting.js"></script>
+    <div align="center">
+		<canvas id="myCanvas" width="280" height="280" style="background: grey"></canvas>
+        <br /><br />
+        <button onclick="javascript:clearArea();return false;"><b>Clear Area</b></button>
+        <b>Select line width: </b><select id="selWidth">
+            <option value="16" >16</option>
+			<option value="24" selected="selected">24</option>
+			<option value="32" >32</option>
+			<option value="40" >40</option>
+        </select>
+	</div>
+	<p>
+		<input type="submit" value="Download and Send Canvas" onclick="sendFile()">
+	</p>
+	
+	<header class="navbar">
+	<h1>Choose an Image</h1>
+	<form action="/upload" method="post" enctype="multipart/form-data" >
+		<span class="btn btn-default btn-file">
+			Browse <input type="file" name="image">
+		</span>
+		<input type="submit" value="Upload your image" class="btn btn-primary">
+	</form>
+	
+	</br>
+	</br>
+	
+</header>
+
+</body>
+</html>
